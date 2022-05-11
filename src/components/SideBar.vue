@@ -35,9 +35,9 @@
           placeholder=""
         />
         <input type="hidden" name="originLat" v-model="originLat" />
-        <input type="hidden" name="originLong" v-model="originLong" />
+        <input type="hidden" name="originLng" v-model="originLng" />
         <input type="hidden" name="destinationLat" v-model="destinationLat" />
-        <input type="hidden" name="destinationLong" v-model="destinationLong" />
+        <input type="hidden" name="destinationLng" v-model="destinationLng" />
         <div class="mb-2 mt-2">
           <div v-for="error in errors" :key="error" class="validate-error">
             {{ error }}
@@ -81,9 +81,9 @@ export default {
       departureDate: new Date(),
       returnDate: new Date(),
       originLat: '',
-      originLong: '',
+      originLng: '',
       destinationLat: '',
-      destinationLong: '',
+      destinationLng: '',
       locations: [],
       errors: [],
     };
@@ -143,6 +143,7 @@ export default {
       return validates.length === 0; // check if it has error
     },
     onSubmit() {
+      console.log(this);
       if (this.validate() === true) this.submitTrack(); // only submit if no error
     },
     submitTrack() {
@@ -185,10 +186,10 @@ export default {
               }
               if (type === 'origin') {
                 this.originLat = '';
-                this.orignLong = '';
+                this.originLng = '';
               } else {
                 this.destinationLat = '';
-                this.destinationLong = '';
+                this.destinationLng = '';
               }
             } else {
               this.errors = this.errors.filter(item => item !== errorMessage);
@@ -196,11 +197,11 @@ export default {
               this.locations = [...this.locations];
               if (type === 'origin') {
                 this.originLat = location.lat;
-                this.orignLong = location.lng;
+                this.originLng = location.lng;
                 this.locations[0] = location;
               } else {
                 this.destinationLat = location.lat;
-                this.destinationLong = location.lng;
+                this.destinationLng = location.lng;
                 if (this.locations.length === 0) this.locations = [location];
                 else this.locations[1] = location;
               }
