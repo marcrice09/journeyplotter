@@ -1,4 +1,4 @@
-> A Vue.js project
+> A Vue.js project to plot a journey (start and destination)
 
 ## Build Setup
 
